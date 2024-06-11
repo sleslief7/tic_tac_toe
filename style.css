@@ -21,13 +21,18 @@ body {
   flex-direction: column;
   align-items: center;
 }
+h1,
+#turn,
+#board,
+#game-btns {
+  margin-bottom: 15px;
+}
 h1 {
   font-size: 3rem;
   margin-top: 30px;
-  margin-bottom: 15px;
 }
-#game-btns {
-  margin-bottom: 15px;
+#turn {
+  font-size: 1.8rem;
 }
 .btn {
   padding: 6px 15px;
@@ -67,8 +72,16 @@ h1 {
   transition: 0.4s;
 }
 .box:hover {
-  background-color: #ebe6e6;
+  background-color: #f5eeee;
 }
 #stats {
-  margin-top: 15px;
+  font-weight: bold;
+  display: flex;
+  gap: 16px;
+}
+#stats > span > span {
+  font-weight: 100;
+}
+.winner-box {
+  color: #00940f;
 }

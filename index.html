@@ -17,31 +17,33 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <div id="container">
+    <div id="landing"></div>
+    <div id="container" class="disabled">
       <h1>Tic Tac Toe</h1>
+      <div id="turn">Let's play</div>
       <div id="game-btns">
-        <button type="button" class="btn">Start</button>
-        <button type="button" class="btn">restart</button>
+        <button type="button" class="btn" id="start-btn">Start</button>
+        <button type="button" class="btn" id="restart-btn">restart</button>
       </div>
       <div id="board">
-        <div class="box" id="1"><i class="fa-solid fa-x"></i></div>
-        <div class="box" id="2"><i class="fa-solid fa-o"></i></div>
+        <div class="box" id="0"></div>
+        <div class="box" id="1"></div>
+        <div class="box" id="2"></div>
         <div class="box" id="3"></div>
         <div class="box" id="4"></div>
         <div class="box" id="5"></div>
         <div class="box" id="6"></div>
         <div class="box" id="7"></div>
         <div class="box" id="8"></div>
-        <div class="box" id="9"></div>
       </div>
       <div id="stats">
-        <span>Player 1</span>
-        <span>Player 2</span>
-        <span>Rounds</span>
-        <span>Ties</span>
-        <span>Winner</span>
+        <span>Player 1: <span id="player-1">0</span></span>
+        <span>Player 2: <span id="player-2">0</span></span>
+        <span>Rounds: <span id="rounds">0</span></span>
+        <span>Ties: <span id="ties">0</span></span>
+        <span>Winner: <span id="winner"></span></span>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
