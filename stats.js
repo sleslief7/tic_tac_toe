@@ -6,6 +6,7 @@ export const stats = (function () {
   let playerOneStat = document.getElementById("player-one");
   let playerTwoStat = document.getElementById("player-two");
 
+  let isGameDone = false;
   let ties = 0;
   let rounds = 0;
   let maxRounds = 3;
@@ -43,6 +44,7 @@ export const stats = (function () {
     rounds = 0;
     ties = 0;
     refreshStats();
+    isGameDone = false;
   }
   function displayWinner() {
     const turn = document.getElementById("turn");
@@ -54,28 +56,26 @@ export const stats = (function () {
     if (playerOneScore === playerTwoScore && rounds >= maxRounds) {
       turn.innerHTML = `It's a tie! Both players won ${playerOneScore} of ${maxRounds} rounds!`;
       restartBtn.innerText = `Restart`;
-      clearAfterFinalWin();
+      isGameDone = true;
     } else if (rounds >= maxRounds && ties !== maxRounds) {
       turn.innerHTML = `${winner} won ${winnerScore} of ${maxRounds} rounds!`;
       restartBtn.innerText = `Restart`;
-      clearAfterFinalWin();
+      isGameDone = true;
     } else if (rounds >= maxRounds && ties === maxRounds) {
       turn.innerHTML = `Nobody won any of the ${maxRounds} rounds, try it again!`;
       restartBtn.innerText = `Restart`;
-      clearAfterFinalWin();
+      isGameDone = true;
     }
     return false;
   }
-  function clearAfterFinalWin() {
-    restartBtn.addEventListener("click", () => {
-      restart();
-    });
-  }
+
   function setNames({ nameOne, nameTwo }) {
     playerOneName = nameOne;
     playerTwoName = nameTwo;
     refreshStats();
   }
+
+  const getIsGameDone = () => isGameDone;
 
   return {
     addPlayerOne,
@@ -85,5 +85,6 @@ export const stats = (function () {
     restart,
     setNames,
     displayWinner,
+    getIsGameDone,
   };
 })();

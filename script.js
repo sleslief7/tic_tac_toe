@@ -24,11 +24,29 @@ startGameBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   gameBoard.restart();
+  if (stats.getIsGameDone()) stats.restart();
 });
 
 boxes.forEach((el) =>
   el.addEventListener("click", (e) => {
     let target = e.currentTarget;
     gameBoard.handlePlay(Number(target.id));
+  })
+);
+
+boxes.forEach((el) =>
+  el.addEventListener("mouseenter", (e) => {
+    let target = e.currentTarget;
+    if (target.children.length > 0) return;
+    target.innerHTML = gameBoard.generateIcon(gameBoard.getTurn(), true);
+  })
+);
+
+boxes.forEach((el) =>
+  el.addEventListener("mouseleave", (e) => {
+    let target = e.currentTarget;
+    if (target.innerHTML && target.children[0]?.classList?.contains("i-ph")) {
+      target.innerHTML = "";
+    }
   })
 );

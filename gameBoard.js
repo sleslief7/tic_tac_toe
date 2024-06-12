@@ -23,10 +23,10 @@ export const gameBoard = (function () {
     isXTurn = !isXTurn;
     turn.innerText = `${getTurn()}'s turn`;
   }
-  function generateIcon(letter) {
+  function generateIcon(letter, placeholder = false) {
     if (!letter) return "";
     let iconName = letter === "X" ? "fa-x" : "fa-o";
-    return `<i class="fa-solid ${iconName}"></i>`;
+    return `<i class="fa-solid ${iconName} ${placeholder ? "i-ph" : ""}"></i>`;
   }
   function handlePlay(i) {
     let box = document.getElementById(`${i}`);
@@ -92,5 +92,5 @@ export const gameBoard = (function () {
     toggleTurn();
   }
 
-  return { restart, handlePlay, toggleTurn };
+  return { restart, handlePlay, toggleTurn, generateIcon, getTurn };
 })();
