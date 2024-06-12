@@ -1,47 +1,92 @@
 export const stats = (function () {
-  let player1 = 0;
-  let player1Stat = document.getElementById("player-1");
-  let player2 = 0;
-  let player2Stat = document.getElementById("player-2");
-  let rounds = 0;
-  let roundsStat = document.getElementById("rounds");
-  let ties = 0;
-  let tiesStat = document.getElementById("ties");
-  let winner = "";
-  let winnerStat = document.getElementById("winner");
+  let playerOneScore = 0;
+  let playerTwoScore = 0;
+  let playerOneName = "Player One";
+  let playerTwoName = "Player Two";
+  let playerOneStat = document.getElementById("player-one");
+  let playerTwoStat = document.getElementById("player-two");
 
-  function addPlayer1() {
-    player1++;
-    player1Stat.innerHTML = player1;
+  let ties = 0;
+  let rounds = 0;
+  let maxRounds = 3;
+  let tiesStat = document.getElementById("ties");
+  let roundsStat = document.getElementById("rounds");
+
+  const restartBtn = document.getElementById("restart-btn");
+
+  function refreshStats() {
+    roundsStat.innerHTML = rounds;
+    tiesStat.innerHTML = ties;
+    playerOneStat.innerHTML = `${playerOneName}: ${playerOneScore}`;
+    playerTwoStat.innerHTML = `${playerTwoName}: ${playerTwoScore}`;
   }
-  function addPlayer2() {
-    player2++;
-    player2Stat.innerHTML = player2;
+
+  function addPlayerOne() {
+    playerOneScore++;
+    refreshStats();
+  }
+  function addPlayerTwo() {
+    playerTwoScore++;
+    refreshStats();
   }
   function addRounds() {
     rounds++;
-    roundsStat.innerHTML = rounds;
+    refreshStats();
   }
   function addTies() {
     ties++;
-    tiesStat.innerHTML = ties;
-  }
-  function displayWinner() {
-    winner = player1 > player2 ? "Player 1" : "Player 2";
-    winnerStat.innerHTML = winner;
+    refreshStats();
   }
   function restart() {
-    player1 = 0;
-    player1Stat.innerHTML = player1;
-    player2 = 0;
-    player2Stat.innerHTML = player2;
+    playerOneScore = 0;
+    playerTwoScore = 0;
     rounds = 0;
-    roundsStat.innerHTML = rounds;
     ties = 0;
-    tiesStat.innerHTML = ties;
-    winner = "";
-    winnerStat.innerHTML = winner;
+    refreshStats();
+  }
+  function displayWinner() {
+    const turn = document.getElementById("turn");
+    let winner =
+      playerOneScore > playerTwoScore ? playerOneName : playerTwoName;
+    let winnerScore =
+      playerOneScore > playerTwoScore ? playerOneScore : playerTwoScore;
+
+    if (playerOneScore === playerTwoScore && rounds >= maxRounds) {
+      turn.innerHTML = `It's a tie! Both players won ${playerOneScore} of ${maxRounds} rounds!`;
+      restartBtn.innerText = `Restart`;
+      clearAfterFinalWin();
+      return true;
+    } else if (rounds >= maxRounds && ties !== maxRounds) {
+      turn.innerHTML = `${winner} won ${winnerScore} of ${maxRounds} rounds!`;
+      restartBtn.innerText = `Restart`;
+      clearAfterFinalWin();
+      return true;
+    } else if (rounds >= maxRounds && ties === maxRounds) {
+      turn.innerHTML = `Nobody won any of the ${maxRounds} rounds, try it again!`;
+      restartBtn.innerText = `Restart`;
+      clearAfterFinalWin();
+      return true;
+    }
+    return false;
+  }
+  function clearAfterFinalWin() {
+    restartBtn.addEventListener("click", () => {
+      restart();
+    });
+  }
+  function setNames({ nameOne, nameTwo }) {
+    playerOneName = nameOne;
+    playerTwoName = nameTwo;
+    refreshStats();
   }
 
-  return { addPlayer1, addPlayer2, addRounds, addTies, displayWinner, restart };
+  return {
+    addPlayerOne,
+    addPlayerTwo,
+    addRounds,
+    addTies,
+    restart,
+    setNames,
+    displayWinner,
+  };
 })();

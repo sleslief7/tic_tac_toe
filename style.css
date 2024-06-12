@@ -16,7 +16,7 @@ body {
     #bcbcbc 100%
   );
 }
-#container {
+#board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,7 @@ h1 {
 }
 #turn {
   font-size: 1.8rem;
+  display: hidden;
 }
 .btn {
   padding: 6px 15px;
@@ -84,4 +85,42 @@ h1 {
 }
 .winner-box {
   color: #00940f;
+}
+.disabled {
+  display: none !important;
+}
+.show {
+  display: block;
+}
+#landing,
+#players-div,
+#players {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#landing-h1 {
+  font-size: 7rem;
+}
+#landing-p {
+  font-size: 4rem;
+  margin-bottom: 15px;
+}
+#start-btn {
+  font-size: 2rem;
+}
+#players {
+  width: fit-content;
+}
+#players > label {
+  font-size: 4rem;
+  margin-bottom: 15px;
+}
+#players > input {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+  height: 40px;
 }
