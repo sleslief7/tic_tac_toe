@@ -26,6 +26,7 @@ h1,
 #board,
 #game-btns {
   margin-bottom: 15px;
+  text-align: center;
 }
 h1 {
   font-size: 3rem;

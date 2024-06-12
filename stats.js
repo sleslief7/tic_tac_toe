@@ -55,17 +55,14 @@ export const stats = (function () {
       turn.innerHTML = `It's a tie! Both players won ${playerOneScore} of ${maxRounds} rounds!`;
       restartBtn.innerText = `Restart`;
       clearAfterFinalWin();
-      return true;
     } else if (rounds >= maxRounds && ties !== maxRounds) {
       turn.innerHTML = `${winner} won ${winnerScore} of ${maxRounds} rounds!`;
       restartBtn.innerText = `Restart`;
       clearAfterFinalWin();
-      return true;
     } else if (rounds >= maxRounds && ties === maxRounds) {
       turn.innerHTML = `Nobody won any of the ${maxRounds} rounds, try it again!`;
       restartBtn.innerText = `Restart`;
       clearAfterFinalWin();
-      return true;
     }
     return false;
   }
